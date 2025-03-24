@@ -423,7 +423,7 @@ export class RemoteThreadListThreadListRuntimeCore
     for await (const result of messageStream) {
       const newTitle =
         result.content.filter((c) => c.type === "text")[0]?.text ??
-        "New Thread";
+        (messages[0]?.content.filter(c => c.type === "text")[0]?.text?.substring(0, 15) + '...' || 'New Thread');
       const state = this._state.baseValue;
       this._state.update({
         ...state,
